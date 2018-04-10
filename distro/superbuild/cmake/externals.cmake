@@ -346,18 +346,19 @@ elseif(USE_PRECOMPILED_VTK)
   mark_as_advanced(LSB_RELEASE)
   set(ubuntu_version)
   if(LSB_RELEASE)
+    message(found LSB_RELEASE)
     execute_process(COMMAND ${LSB_RELEASE} -is
         OUTPUT_VARIABLE osname
-	message(${osname})
         OUTPUT_STRIP_TRAILING_WHITESPACE)
+    message(${osname})
     if(osname STREQUAL Ubuntu)
       execute_process(COMMAND ${LSB_RELEASE} -rs
           OUTPUT_VARIABLE ubuntu_version
-	  message(!!>>${ubuntu_version})
           OUTPUT_STRIP_TRAILING_WHITESPACE)
+      message(${ubuntu_version})
     endif()
   endif()
-  message(${ubuntu_version})
+  message(not found ubuntu)
   if (ubuntu_version EQUAL 14.04)
     if(DD_QT_VERSION EQUAL 4)
       set(vtk_package_url ${url_base}/vtk7.1-qt4.8-python2.7-ubuntu14.04.tar.gz)
